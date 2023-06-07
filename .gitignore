@@ -1,4 +1,9 @@
 # Byte-compiled / optimized / DLL files
+# Temporary
+plan.txt
+requirements.txt
+test_grammar_check.json
+
 __pycache__/
 *.py[cod]
 *$py.class
