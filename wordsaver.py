@@ -5,9 +5,15 @@ from pylanguagetool import api
 
 class WordSaver:
     def __init__(self,):
+        #just Paul
         self.name = "Paul"
 
     def fill_in_dictionary(self):
+        """
+        Get user input and save word into dict 
+        then add it into list
+
+        """
         user_interaction = True
         new_words_list = []
         while user_interaction:    
@@ -53,16 +59,18 @@ class WordSaver:
         return main_dict
     
     def save_words_into_json(self, list_dict_words):
+        """Saved dictionarys into json file"""
         try: 
             with open('mydick.json',"r") as file:
                 list_old_words = json.load(file)
-            a = WordSaver.check_repeated_words(self,list_old_words,list_dict_words,)
+            # sorts words
+            sorted_word = WordSaver.check_repeated_words(self,list_old_words,list_dict_words,)
             #for word in list_dict_words:
             #   list_old_words.update(word) 
             #dictionary['saved_words'].update(new_word)
-            print (a)
+            print (sorted_word)
             with open('mydick.json','w') as file:
-                json.dump(a, file, indent=4, ensure_ascii=False)
+                json.dump(sorted_word, file, indent=4, ensure_ascii=False)
                 
         except (FileNotFoundError):
             dictionary = {}
