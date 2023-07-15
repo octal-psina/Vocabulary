@@ -6,7 +6,7 @@ import random
 #def timer():
     
 
-def random_choice():
+def random_choice_native_lang():
     dict_words = get_json_with_words()
     keys_words = list(dict_words.keys())
     amount_of_words = len(keys_words)
@@ -29,6 +29,47 @@ def random_choice():
             print(random_key)
     print(f"correct {correct}\nincorrect {incorrect}")
 
+def random_choice_foreign_lang():
+
+    dict_words = get_json_with_words()
+    keys_words = list(dict_words.keys())
+    
+    amount_of_words = len(keys_words)
+    while amount_of_words != 0:
+        amount_of_words -= 1
+        random_key = random.choice(keys_words) 
+        keys_words.pop(keys_words.index(random_key))
+        answer = input(f"{random_key}: ")
+        correct = 0
+        incorrect = 0
+        if answer == 'q':
+            break
+        else:
+            list_of_words = dict_words[random_key].split()
+            if answer in list_of_words:
+                correct += 1
+                print('')
+                print(dict_words[random_key])
+            elif answer not in list_of_words:
+                incorrect += 1
+                print("")
+                print(dict_words[random_key])
+    print(f"correct {correct}\nincorrect {incorrect}")
+    #amount_of_words = len(keys_words)
+    #correct = 0
+    #incorrect = 0
+    #while  amount_of_words != 0:
+    #    amount_of_words -= 1
+    
+    #    # Delete word, which was randomly chosen
+    #    
+    #
+    #    elif answer == random_key:
+    #    elif answer != random_key:
+    #        incorrect += 1
+    #        print(" ")
+    #        print(random_key)
+    #print(f"correct {correct}\nincorrect {incorrect}")
 
 
 def get_json_with_words():
@@ -59,7 +100,7 @@ def show_particular_word():
             interaction = False
             #break
         words = get_json_with_words()
-        pattern = f'^({wanted_word})' #+(_)?[0-9]*$'
+        pattern = f'({wanted_word})' #+(_)?[0-9]*$'
         for key,value in words.items():
             match = re.match(pattern, key)
             if match:
@@ -67,14 +108,36 @@ def show_particular_word():
                 #print(f"{match.group()}")
                 print(f"{key} {value}")
             else:
-                match = re.match(pattern, value)
-                if match:
-                    print(f"{value} {key}")
-                else:
-                    pass
-    #print(f'совпадение ключей в списке  log/pas:\n{match_list}')
+                list_translated_words = value.split()
+                
+                for translated_word in list_translated_words:
+                    match = re.match(pattern, translated_word)
+                    if match:
+                        print(f'{value} {key}')
+
+                #list_translated_words = value.split()
+                ##print(list_translated_words)
+                #if wanted_word in list_translated_words:
+                #    print(f"{value} {key}")    
+                #counter = len(list_translated_words)
+                #for translated_word in list_translated_words:
+                #        
+                #    while counter != 0:
+                #        counter -= 1   
+                #        index = list_translated_words.index(translated_word)
+
+                #        print(index)
+                #        word = list_translated_words.pop(index)
+                #        match = re.match(pattern, word)
+                #        if match:
+                #            print(f"{value} {key}")
+                #        elif not match:
+                #            print('no')
+                #        #    continue
+    #print(f'сов#падение ключей в списке  log/pas:\n{match_list}')
 
 #show_all_words()
 #show_alphabetic_words()
 #show_particular_word()
-random_choice()
+#random_choice_native_lang()
+random_choice_foreign_lang()
