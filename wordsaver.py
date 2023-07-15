@@ -18,15 +18,15 @@ class WordSaver:
         new_words_list = []
         while user_interaction:    
             word = input("Please insert word: ")
-            if word == 'q':
+            if word.rstrip().lstrip().lower() == 'q':
                 user_interaction = False
                 break
         
             translation = input("Please insert translation: ")
-            if translation == 'q':
+            if translation.rstrip().lstrip().lower() == 'q':
                 user_interaction = False
                 break
-            new_word = {word:translation}
+            new_word = {word.rstrip().lstrip().lower():translation.rstrip().lstrip().lower()}
             if new_word:
                 new_words_list.append(new_word)
             #else:
@@ -51,7 +51,7 @@ class WordSaver:
                 # check if key in main dict keys
                 if key_word in keys_main_dict:
                     # if is add another defenition to already existing word
-                    main_dict[key_word] += ', '+(dictionary[key_word])
+                    main_dict[key_word] += ' ' +(dictionary[key_word])
                 else:
                     # if not just add another {word:defenition} into main dictionary
                     main_dict.update(dictionary)
